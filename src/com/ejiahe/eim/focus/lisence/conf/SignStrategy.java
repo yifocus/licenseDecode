@@ -15,22 +15,23 @@ import com.ejiahe.eim.focus.lisence.manager.sign.source.SignSHA1;
  */
 public enum SignStrategy {
 
-	MD5(SignMD5.class),
-	SHA1(SignSHA1.class),
-	DEFAULT(SignDefault.class);
-	private ISign signManager;
-	private SignStrategy(Class<? extends ISign> clzz){
-		try {
-			signManager = clzz.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
+	MD5,
+	SHA1,
+	DEFAULT;
 	
 	public ISign getSignManager(){
-		return signManager;
+		switch (this) {
+		case MD5:
+			return new SignMD5();
+		case SHA1:
+			return new SignSHA1();
+		case DEFAULT:
+			return new SignDefault();
+		default:
+			break;
+		}
+		
+		return new SignDefault();
 	}
 	
 	public static SignStrategy parse(String name){

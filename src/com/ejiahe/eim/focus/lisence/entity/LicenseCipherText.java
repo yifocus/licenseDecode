@@ -217,26 +217,4 @@ public class LicenseCipherText {
 	}
 	
 	
-	public enum LicenseStatus{
-		normal(1),standby(2),disable(0);
-		
-		private int status;
-		private LicenseStatus( int status){
-			this.status = status;
-		}
-		
-		public int status(){
-			return status;
-		}
-
-		public static LicenseStatus parse(String statusStr) {
-			for(LicenseStatus status : values()){
-				if(status.name().equals(statusStr)){
-					return status;
-				}
-			}
-			return null;
-		}
-
-	}
 }

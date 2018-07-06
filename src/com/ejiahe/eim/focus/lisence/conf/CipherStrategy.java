@@ -15,22 +15,11 @@ import com.ejiahe.eim.focus.lisence.manager.cipher.source.CipherRSA;
  * @time 下午5:17:21
  */
 public enum CipherStrategy {
-	_3DES(Cipher3DES.class),
-	DES(CipherDES.class),
-	ESA(CipherAES.class),
-	DEFAULT(CipherAES.class),
-	RSA(CipherRSA.class);
-	private ICipher chiper;
-	private CipherStrategy(Class<? extends ICipher> chiperClzz){
-		try {
-			this.chiper = chiperClzz.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
-	
+	_3DES,
+	DES,
+	ESA,
+	DEFAULT,
+	RSA;
 	/**
 	 * 获取对称算法加密解密的逻辑逻辑服务实例
 	 *
@@ -39,7 +28,22 @@ public enum CipherStrategy {
 	 * @time 下午2:09:15
 	 */
 	public ICipher getChiperManager(){
-		return chiper;
+		switch (this) {
+		case _3DES:
+			return new Cipher3DES();
+		case DES:
+			return new CipherDES();
+		case ESA:
+			return new CipherAES();
+		case DEFAULT:
+			return new CipherAES();
+		case RSA:
+			return new CipherRSA();
+		default:
+			break;
+		}
+		
+		return new CipherAES();
 	}
 	
 	public static CipherStrategy parse(String name){

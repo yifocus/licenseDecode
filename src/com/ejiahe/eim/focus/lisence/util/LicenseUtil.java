@@ -290,7 +290,7 @@ public class LicenseUtil {
 	 * @time 上午9:57:23
 	 */
 	public static String getMainBoardSerialNum() {
-		String productUUID = "MainBoardSerialNum";
+		String productUUID = "";
 		BufferedReader bufferedReader = null;
 		BufferedReader errorReader = null;
 		Process process = null;
